@@ -1,4 +1,8 @@
 
+import sys
+sys.setrecursionlimit(100000000)
+
+
 class Token:
     def __init__(self, type, value=None):
         self.type = type
@@ -112,11 +116,11 @@ def tokenize_expression(expression):
             if char == '+':
                 tokens.append(Token(2, '+'))
             elif char == '*':
-                tokens.append(Token(3, '*'))
+                tokens.append(Token(5, '*'))
             elif char == '-':
-                tokens.append(Token(2, '-'))
+                tokens.append(Token(3, '-'))
             elif char == '/':
-                tokens.append(Token(3, '/'))
+                tokens.append(Token(5, '/'))
 
     if number_buffer:
         tokens.append(Token(1, float(''.join(number_buffer))))
@@ -140,7 +144,7 @@ if __name__ == '__main__':
     #     Token(3, '*'),
     #     Token(1, 7),
     # ]
-    tokens = tokenize_expression(input('>>>'))
+    tokens = tokenize_expression(input())
     p = Parser(tokens)
     tree = p.parse()
     ev = Evaluate()
